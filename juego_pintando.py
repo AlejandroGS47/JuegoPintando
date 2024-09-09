@@ -74,6 +74,9 @@ def triangle(start, end):
 
     end_fill()
 
+def pentagon(start, end):
+    """ Pentagon method """
+    pass
 
 
 def tap(x, y):

@@ -1,4 +1,16 @@
+
+"""Snake, classic arcade game.
+
+Exercises
+
+1. How do you make the snake faster or slower?
+2. How can you make the snake go around the edges?
+3. How would you move the food?
+4. Change the snake to respond to mouse clicks.
+"""
+
 from random import randrange, choice
+
 from turtle import *
 
 from freegames import square, vector
@@ -7,7 +19,9 @@ food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
-# Definir las posibles direcciones en las que la comida puede moverse
+
+colors = ['black', 'blue', 'purple', 'yellow', 'orange']
+
 directions = [vector(10, 0), vector(-10, 0), vector(0, 10), vector(0, -10)]
 
 
@@ -27,7 +41,6 @@ def move_food():
     move_direction = choice(directions)
     new_food_position = food + move_direction
 
-    # Verificar que la comida no se salga de los límites
     if inside(new_food_position):
         food.move(move_direction)
 
@@ -54,12 +67,11 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, choice(colors))
 
     square(food.x, food.y, 9, 'green')
     update()
 
-    # Llamar a la función para mover la comida
     move_food()
 
     ontimer(move, 100)

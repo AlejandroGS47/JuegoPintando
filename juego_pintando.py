@@ -1,14 +1,3 @@
-"""Paint, for drawing shapes.
-
-Exercises
-
-1. Add a color.
-2. Complete circle.
-3. Complete rectangle.
-4. Complete triangle.
-5. Add width parameter.
-"""
-
 from turtle import *
 
 from freegames import vector
@@ -42,41 +31,27 @@ def circle(start, end):
 
 
 def rectangle(start, end):
-     """Draw rectangle from start to end."""
-     up()
-     goto(start.x, start.y)
-     down()
-     begin_fill()
-
-     # Lados del rectángulo
-     width = end.x - start.x
-     height = end.y - start.y
-
-     for count in range(2):
-        forward(width)  # Lado largo
-        left(90)
-        forward(height)  # Lado corto
-        left(90)
-
-     end_fill()
+    """Draw rectangle from start to end."""
+    pass  # TODO
 
 
 def triangle(start, end):
     """Draw triangle from start to end."""
+    pass  # TODO
+
+
+def pentagon(start, end):
+    """Draw pentagon from start to end."""
     up()
     goto(start.x, start.y)
     down()
     begin_fill()
 
-    for count in range(3):
+    for count in range(5):
         forward(end.x - start.x)
-        left(120)  # Ángulo de 120 grados para un triángulo equilátero
+        left(72)  # Ángulo para un pentágono regular
 
     end_fill()
-
-def pentagon(start, end):
-    """ Pentagon method """
-    pass
 
 
 def tap(x, y):
@@ -107,9 +82,12 @@ onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
+onkey(lambda: color('orange'), 'O')  # Color nuevo: naranja
 onkey(lambda: store('shape', line), 'l')
 onkey(lambda: store('shape', square), 's')
 onkey(lambda: store('shape', circle), 'c')
 onkey(lambda: store('shape', rectangle), 'r')
 onkey(lambda: store('shape', triangle), 't')
+onkey(lambda: store('shape', pentagon), 'p')  # Asignar la tecla 'p' al pentágono
 done()
+

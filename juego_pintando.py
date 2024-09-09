@@ -1,6 +1,7 @@
 from turtle import *
 
 from freegames import vector
+import math
 
 
 def line(start, end):
@@ -25,19 +26,55 @@ def square(start, end):
     end_fill()
 
 
-def circle(start, end):
+def draw_circle(start, end):
     """Draw circle from start to end."""
-    pass  # TODO
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+
+    radius = math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2)
+    circle(radius)
+
+    end_fill()
 
 
 def rectangle(start, end):
     """Draw rectangle from start to end."""
-    pass  # TODO
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+
+    # Lados del rectángulo
+    width = end.x - start.x
+    height = end.y - start.y
+
+    for count in range(2):
+        forward(width)  # Lado largo
+        left(90)
+        forward(height)  # Lado corto
+        left(90)
+
+    end_fill()
+
 
 
 def triangle(start, end):
     """Draw triangle from start to end."""
-    pass  # TODO
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+
+    # Calcular el lado del triángulo
+    side = end.x - start.x
+
+    for count in range(3):
+        forward(side)
+        left(120)  # Ángulo para un triángulo equilátero
+
+    end_fill()
 
 
 def pentagon(start, end):
@@ -80,12 +117,13 @@ onkey(undo, 'u')
 onkey(lambda: color('black'), 'K')
 onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
+onkey(lambda: color('purple'), 'P')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
 onkey(lambda: color('orange'), 'O')  # Color nuevo: naranja
 onkey(lambda: store('shape', line), 'l')
 onkey(lambda: store('shape', square), 's')
-onkey(lambda: store('shape', circle), 'c')
+onkey(lambda: store('shape', draw_circle), 'c')
 onkey(lambda: store('shape', rectangle), 'r')
 onkey(lambda: store('shape', triangle), 't')
 onkey(lambda: store('shape', pentagon), 'p')  # Asignar la tecla 'p' al pentágono

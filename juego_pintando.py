@@ -44,10 +44,7 @@ def draw_circle(start, end):
     down()
     begin_fill()
 
-    # Calculate the radius as the distance between the points start and end
     radius = math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2)
-
-    # Use the turtle's circle method to draw the circle
     circle(radius)
 
     end_fill()

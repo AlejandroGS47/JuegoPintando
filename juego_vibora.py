@@ -1,4 +1,3 @@
-
 """Snake, classic arcade game.
 
 Exercises
@@ -21,29 +20,30 @@ aim = vector(0, -10)
 
 
 colors = ['black', 'blue', 'purple', 'yellow', 'orange']
-
 directions = [vector(10, 0), vector(-10, 0), vector(0, 10), vector(0, -10)]
 
+food_color = 'green'  # Color inicial de la comida
 
 def change(x, y):
     """Change snake direction."""
     aim.x = x
     aim.y = y
 
-
 def inside(point):
     """Return True if point is inside boundaries."""
     return -200 < point.x < 190 and -200 < point.y < 190
 
-
 def move_food():
     """Move food randomly one step and ensure it stays inside the boundaries."""
+    global food_color
+
     move_direction = choice(directions)
     new_food_position = food + move_direction
 
     if inside(new_food_position):
         food.move(move_direction)
 
+        food_color = choice(colors)  # Cambiar el color de la comida al moverla
 
 def move():
     """Move snake forward one segment."""
@@ -69,13 +69,12 @@ def move():
     for body in snake:
         square(body.x, body.y, 9, choice(colors))
 
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, food_color)  # Usar el color actual de la comida
     update()
 
     move_food()
 
     ontimer(move, 100)
-
 
 setup(420, 420, 370, 0)
 hideturtle()
@@ -87,5 +86,3 @@ onkey(lambda: change(0, 10), 'Up')
 onkey(lambda: change(0, -10), 'Down')
 move()
 done()
-
-

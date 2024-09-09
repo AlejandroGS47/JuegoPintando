@@ -9,6 +9,7 @@ Exercises
 """
 
 from random import randrange
+import random
 from turtle import *
 
 from freegames import square, vector
@@ -16,6 +17,8 @@ from freegames import square, vector
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
+
+colors = ['black', 'blue', 'purple', 'yellow', 'orange']
 
 
 def change(x, y):
@@ -51,7 +54,7 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, random.choice(colors))
 
     square(food.x, food.y, 9, 'green')
     update()

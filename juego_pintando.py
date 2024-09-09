@@ -12,6 +12,7 @@ Exercises
 from turtle import *
 
 from freegames import vector
+import math
 
 
 def line(start, end):
@@ -36,9 +37,20 @@ def square(start, end):
     end_fill()
 
 
-def circle(start, end):
+def draw_circle(start, end):
     """Draw circle from start to end."""
-    pass  # TODO
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+
+    # Calculate the radius as the distance between the points start and end
+    radius = math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2)
+
+    # Use the turtle's circle method to draw the circle
+    circle(radius)
+
+    end_fill()
 
 
 def rectangle(start, end):
@@ -77,11 +89,12 @@ onkey(undo, 'u')
 onkey(lambda: color('black'), 'K')
 onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
+onkey(lambda: color('purple'), 'P')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
 onkey(lambda: store('shape', line), 'l')
 onkey(lambda: store('shape', square), 's')
-onkey(lambda: store('shape', circle), 'c')
+onkey(lambda: store('shape', draw_circle), 'c')
 onkey(lambda: store('shape', rectangle), 'r')
 onkey(lambda: store('shape', triangle), 't')
 done()

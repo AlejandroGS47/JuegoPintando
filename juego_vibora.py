@@ -1,3 +1,4 @@
+
 """Snake, classic arcade game.
 
 Exercises
@@ -8,8 +9,8 @@ Exercises
 4. Change the snake to respond to mouse clicks.
 """
 
-from random import randrange
-import random
+from random import randrange, choice
+
 from turtle import *
 
 from freegames import square, vector
@@ -18,7 +19,10 @@ food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
+
 colors = ['black', 'blue', 'purple', 'yellow', 'orange']
+
+directions = [vector(10, 0), vector(-10, 0), vector(0, 10), vector(0, -10)]
 
 
 def change(x, y):
@@ -27,9 +31,18 @@ def change(x, y):
     aim.y = y
 
 
-def inside(head):
-    """Return True if head inside boundaries."""
-    return -200 < head.x < 190 and -200 < head.y < 190
+def inside(point):
+    """Return True if point is inside boundaries."""
+    return -200 < point.x < 190 and -200 < point.y < 190
+
+
+def move_food():
+    """Move food randomly one step and ensure it stays inside the boundaries."""
+    move_direction = choice(directions)
+    new_food_position = food + move_direction
+
+    if inside(new_food_position):
+        food.move(move_direction)
 
 
 def move():
@@ -54,10 +67,13 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, random.choice(colors))
+        square(body.x, body.y, 9, choice(colors))
 
     square(food.x, food.y, 9, 'green')
     update()
+
+    move_food()
+
     ontimer(move, 100)
 
 
@@ -71,3 +87,5 @@ onkey(lambda: change(0, 10), 'Up')
 onkey(lambda: change(0, -10), 'Down')
 move()
 done()
+
+

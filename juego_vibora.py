@@ -1,14 +1,4 @@
-"""Snake, classic arcade game.
-
-Exercises
-
-1. How do you make the snake faster or slower?
-2. How can you make the snake go around the edges?
-3. How would you move the food?
-4. Change the snake to respond to mouse clicks.
-"""
-
-from random import randrange
+from random import randrange, choice
 from turtle import *
 
 from freegames import square, vector
@@ -17,6 +7,9 @@ food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
+# Definir las posibles direcciones en las que la comida puede moverse
+directions = [vector(10, 0), vector(-10, 0), vector(0, 10), vector(0, -10)]
+
 
 def change(x, y):
     """Change snake direction."""
@@ -24,9 +17,19 @@ def change(x, y):
     aim.y = y
 
 
-def inside(head):
-    """Return True if head inside boundaries."""
-    return -200 < head.x < 190 and -200 < head.y < 190
+def inside(point):
+    """Return True if point is inside boundaries."""
+    return -200 < point.x < 190 and -200 < point.y < 190
+
+
+def move_food():
+    """Move food randomly one step and ensure it stays inside the boundaries."""
+    move_direction = choice(directions)
+    new_food_position = food + move_direction
+
+    # Verificar que la comida no se salga de los límites
+    if inside(new_food_position):
+        food.move(move_direction)
 
 
 def move():
@@ -43,8 +46,8 @@ def move():
 
     if head == food:
         print('Snake:', len(snake))
-        food.x = randrange(-15, 15) * 10
-        food.y = randrange(-15, 15) * 10
+        # En lugar de mover la comida a una posición aleatoria, movemos un paso
+        move_food()
     else:
         snake.pop(0)
 
@@ -68,3 +71,4 @@ onkey(lambda: change(0, 10), 'Up')
 onkey(lambda: change(0, -10), 'Down')
 move()
 done()
+

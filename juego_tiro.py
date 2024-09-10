@@ -1,6 +1,5 @@
 from random import randrange
 from turtle import *
-
 from freegames import vector
 
 ball = vector(-200, -200)
@@ -57,6 +56,11 @@ def move():
         speed.y -= 0.35
         ball.move(speed)
 
+    for target in targets:
+        if target.x < -200:
+            target.x = 200
+            target.y = randrange(-150, 150)
+
     dupe = targets.copy()
     targets.clear()
 
@@ -65,10 +69,6 @@ def move():
             targets.append(target)
 
     draw()
-
-    for target in targets:
-        if not inside(target):
-            return
 
     ontimer(move, 50)
 

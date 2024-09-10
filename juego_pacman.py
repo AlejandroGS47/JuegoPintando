@@ -20,10 +20,10 @@ writer = Turtle(visible=False)
 aim = vector(5, 0)
 pacman = vector(-40, -80)
 ghosts = [
-    [vector(-180, 160), vector(15, 0)],
-    [vector(-180, -160), vector(0, 15)],
-    [vector(100, 160), vector(0, -15)],
-    [vector(100, -160), vector(-15, 0)],
+    [vector(-180, 160), vector(5, 0)],
+    [vector(-180, -160), vector(0, 5)],
+    [vector(100, 160), vector(0, -5)],
+    [vector(100, -160), vector(-5, 0)],
 ]
 # fmt: off
 tiles = [
@@ -135,14 +135,25 @@ def move():
             point.move(course)
         else:
             options = [
-                vector(5, 0),
-                vector(-5, 0),
-                vector(0, 5),
-                vector(0, -5),
+                vector(5, 0),    
+                vector(-5, 0),   
+                vector(0, 5),    
+                vector(0, -5),   
             ]
-            plan = choice(options)
-            course.x = plan.x
-            course.y = plan.y
+
+            min_dist = float('inf')
+            best_option = course
+
+            for option in options:
+                new_pos = point + option
+                dist = abs(pacman - new_pos)
+
+                if valid(new_pos) and dist < min_dist:
+                    min_dist = dist
+                    best_option = option
+
+            course.x = best_option.x
+            course.y = best_option.y
 
         up()
         goto(point.x + 10, point.y + 10)
@@ -154,7 +165,11 @@ def move():
         if abs(pacman - point) < 20:
             return
 
+<<<<<<< HEAD
     ontimer(move, 15)
+=======
+    ontimer(move, 100)
+>>>>>>> 10ffe60ae2a2fba4be09c50877db93bacdf09c88
 
 
 def change(x, y):

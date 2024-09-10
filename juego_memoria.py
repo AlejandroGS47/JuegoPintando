@@ -1,14 +1,3 @@
-"""Memory, puzzle game of number pairs.
-
-Exercises:
-
-1. Count and print how many taps occur.
-2. Decrease the number of tiles to a 4x4 grid.
-3. Detect when all tiles are revealed.
-4. Center single-digit tile.
-5. Use letters instead of tiles.
-"""
-
 from random import *
 from turtle import *
 
@@ -75,9 +64,12 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        goto(x + 25, y + 10)  # Ajuste para centrar el número
         color('black')
-        write(emojis[mark], font=('Arial', 30, 'normal'))
+        write(emojis[mark], align="center", font=('Arial', 30, 'normal'))  # Centramos el texto
+
+    update()
+    ontimer(draw, 100)
 
     if check_win():
         up()
@@ -96,4 +88,3 @@ tracer(False)
 onscreenclick(tap)
 draw()
 done()
-

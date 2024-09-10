@@ -68,9 +68,6 @@ def draw():
         color('black')
         write(emojis[mark], align="center", font=('Arial', 30, 'normal'))  # Centramos el texto
 
-    update()
-    ontimer(draw, 100)
-
     if check_win():
         up()
         goto(0, 0)

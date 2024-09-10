@@ -1,13 +1,3 @@
-"""Cannon, hitting targets with projectiles.
-
-Exercises
-
-1. Keep score by counting target hits.
-2. Vary the effect of gravity.
-3. Apply gravity to the targets.
-4. Change the speed of the ball.
-"""
-
 from random import randrange
 from turtle import *
 
@@ -38,11 +28,17 @@ def draw():
 
     for target in targets:
         goto(target.x, target.y)
-        dot(20, 'blue')
+        dot(20, 'red')  # Los objetivos siguen siendo puntos azules.
 
     if inside(ball):
         goto(ball.x, ball.y)
-        dot(6, 'red')
+        # Dibuja un triángulo amarillo.
+        begin_fill()
+        color('yellow')
+        for _ in range(3):
+            forward(10)  # Tamaño del triángulo.
+            left(120)
+        end_fill()
 
     update()
 

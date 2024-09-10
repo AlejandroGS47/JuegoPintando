@@ -15,13 +15,15 @@ from turtle import *
 from freegames import path
 
 car = path('car.gif')
-tiles = list(range(32)) * 2
+
+emojis = ['🍎', '🍌', '🍇', '🍉', '🍓', '🍒', '🍍', '🥝', '🍋', '🍑', '🍐', '🍈', '🍏', '🥭', '🍊', '👌', 
+          '❤️', '🥥', '🍆', '🥑', '🌽', '🥕', '🥒', '🥬', '🥦', '🍄', '🌶', '🥔', '🍠', '🍯', '🍞', '🧀'] * 2
+
 state = {'mark': None}
 hide = [True] * 64
 
-
 def square(x, y):
-    """Draw white square with black outline at (x, y)."""
+    """Dibuja un cuadrado blanco con borde negro en (x, y)."""
     up()
     goto(x, y)
     down()
@@ -32,32 +34,32 @@ def square(x, y):
         left(90)
     end_fill()
 
-
 def index(x, y):
-    """Convert (x, y) coordinates to tiles index."""
+    """Convierte las coordenadas (x, y) a índice de fichas."""
     return int((x + 200) // 50 + ((y + 200) // 50) * 8)
 
-
 def xy(count):
-    """Convert tiles count to (x, y) coordinates."""
+    """Convierte el índice de fichas a coordenadas (x, y)."""
     return (count % 8) * 50 - 200, (count // 8) * 50 - 200
 
-
 def tap(x, y):
-    """Update mark and hidden tiles based on tap."""
+    """Actualiza la marca y oculta las fichas según el toque."""
     spot = index(x, y)
     mark = state['mark']
 
-    if mark is None or mark == spot or tiles[mark] != tiles[spot]:
+    if mark is None or mark == spot or emojis[mark] != emojis[spot]:
         state['mark'] = spot
     else:
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
 
+def check_win():
+    """Verifica si todos los cuadros están destapados."""
+    return not any(hide)
 
 def draw():
-    """Draw image and tiles."""
+    """Dibuja la imagen y las fichas."""
     clear()
     goto(0, 0)
     shape(car)
@@ -75,13 +77,18 @@ def draw():
         up()
         goto(x + 2, y)
         color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        write(emojis[mark], font=('Arial', 30, 'normal'))
 
-    update()
-    ontimer(draw, 100)
+    if check_win():
+        up()
+        goto(0, 0)
+        color('green')
+        write("¡Ganaste!", align="center", font=('Arial', 40, 'bold'))
+    else:
+        update()
+        ontimer(draw, 100)
 
-
-shuffle(tiles)
+shuffle(emojis)
 setup(420, 420, 370, 0)
 addshape(car)
 hideturtle()
@@ -89,3 +96,4 @@ tracer(False)
 onscreenclick(tap)
 draw()
 done()
+

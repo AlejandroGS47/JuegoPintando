@@ -6,7 +6,7 @@ from freegames import path
 car = path('car.gif')
 
 emojis = ['🍎', '🍌', '🍇', '🍉', '🍓', '🍒', '🍍', '🥝', '🍋', '🍑', '🍐', '🍈', '🍏', '🥭', '🍊', '👌', 
-          '❤️', '🥥', '🍆', '🥑', '🌽', '🥕', '🥒', '🥬', '🥦', '🍄', '🌶', '🥔', '🍠', '🍯', '🍞', '🧀'] * 2
+          '🌮', '🥥', '🍆', '🥑', '🌽', '🥕', '🥒', '🥬', '🥦', '🍄', '🌶', '🥔', '🍠', '🍯', '🍞', '🧀'] * 2
 
 state = {'mark': None}
 hide = [True] * 64
@@ -64,7 +64,7 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 25, y + 10)  # Ajuste para centrar el número
+        goto(x + 25, y + 7)  # Ajuste para centrar el número
         color('black')
         write(emojis[mark], align="center", font=('Arial', 30, 'normal'))  # Centramos el texto
 

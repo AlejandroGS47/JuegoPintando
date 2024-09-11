@@ -79,7 +79,7 @@ def draw():
         up()
         goto(0, 0)
         color('green')
-        write("¡Ganaste!", align="center", font=('Arial', 40, 'bold'))
+        write(f"¡Ganaste! con {taps} taps", align="center", font=('Arial', 40, 'bold'))
     else:
         update()
         ontimer(draw, 100)
